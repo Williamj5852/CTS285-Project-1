@@ -1,0 +1,568 @@
+//<editor-fold defaultstate="collapsed" desc="admin_INFO">
+/* Program is a remake of old calculator, Dataman
+* Jamison Williams
+* Created: 8/20/21 - Last Modified: 12/8/21
+* Last Update: number guessing game
+* CTS - 285 0001
+*/
+//</editor-fold>
+package dataman_williamsjamison_final;
+    import javax.swing.*;
+public class DATAMAN_WilliamsJamison_FINAL {
+    public static int num1, num2, answ, answerKey, equals, attempts, equation;
+    //equation int meaning: 1(addition) 2(subtraction) 3(multiplication) 4(division)
+    public static void main(String[] args){
+        System.out.println("Powering On...\n\n\n\n");
+        mainMenu();
+        //use menu to select one of these options...
+        //basic calculator, answer checker, number guesser
+        //math quiz, and more
+    }
+    public static void mainMenu(){
+        equation = 0;
+        attempts = 0;
+        answerKey = 0;
+        num1 = 0;
+        num2 = 0;
+        answ = 0;
+        equals = 0;
+        String input;
+        String[] option = null;
+        boolean inputValid = false;
+        while (!inputValid) {
+        input = JOptionPane.showInputDialog("--------------------------\nMain Menu\n\n1. Basic Calculator\n2. Answer Checker\n3. Math Quiz\n4. Number Guessing Game\n5. Exit\n\nType 1-5 to choose an option\n--------------------------");
+        //  message ^^  \nMain Menu\n\n1. Basic Calculator\n2. Answer Checker\n3. Math Quiz\n4. Number Guessing Game\n5. Exit\n\nType 1-5 to choose an option\n--------------------------");
+        //Line 25 creates menu screen
+        //Lines 31-61 (try/catch) looks for an error and will return user to main menu if input is invalid
+        //In this case, invalid input are letters
+        //Any int not 1-5 keeps the boolean to false
+        try {
+            int menuOption = Integer.parseInt(input);
+            //switch statement sends user to chosen menu option
+            if (menuOption > 0 && menuOption < 6){
+                    option = new String[menuOption];
+                    inputValid = true;
+                //<editor-fold defaultstate="collapsed" desc="Switch">
+                switch (menuOption){
+                    case 1:
+                        basicMath();
+                        break;
+                    case 2:
+                        answerChecker1();
+                        break;
+                    case 3:
+                        selfQuiz();
+                        break;
+                    case 4:
+                        numberGuesser();
+                        break;
+                    case 5:
+                        exit();
+                        break;
+                }
+                //</editor-fold>
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease type a number 1-5");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease type a number 1-5");
+        }
+        }
+    }
+    public static void basicMath(){
+        String option; int inputValid;
+            do {
+            option = JOptionPane.showInputDialog("Enter Math Symbol: (+ - * /)");
+                switch (option){
+                    case "+":
+                        equation = 1;
+                        inputValid = 1;
+                        break;
+                    case "-":
+                        equation = 2;
+                        inputValid = 1;
+                        break;
+                    case "*":
+                        equation = 3;
+                        inputValid = 1;
+                        break;
+                    case "/":
+                        equation = 4;
+                        inputValid = 1;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Please Enter One of These Math Symbols\n+ (Addition)\n- (Subtraction)\n * (Multiplication)\n / (Division)");
+                        inputValid = 0;
+                        break;
+                }   
+            } while (inputValid == 0);
+        //<editor-fold defaultstate="collapsed" desc="basicMath_add">
+        if (equation == 1){
+            String input;
+            boolean num1Valid = false;
+            while (!num1Valid) {
+                input = JOptionPane.showInputDialog("Enter first number: ");
+                try {
+                    num1 = Integer.parseInt(input);
+                    if (num1 <= 0 || num1 >= 0){
+                        num1Valid = true;
+                    }
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                        num1Valid = false;
+                }
+            }
+            boolean num2Valid = false;
+            while (!num2Valid) {
+                    input = JOptionPane.showInputDialog("Enter second number: ");
+                    try {
+                        num2 = Integer.parseInt(input);
+                        if (num2 <= 0 || num2 >= 0){
+                        num2Valid = true;
+                        }
+                    } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                            num2Valid = false;
+                    }        
+                }
+                    equals = num1 + num2;
+                    JOptionPane.showMessageDialog(null, "Addition:\n\n" + num1 + " + " + num2 + " = " + equals);
+                    equation = 0;
+                    mainMenu();
+        }
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="basicMath_subtract">
+        if (equation == 2){
+            String input;
+            boolean num1Valid = false;
+            while (!num1Valid) {
+                input = JOptionPane.showInputDialog("Enter first number: ");
+                try {
+                    num1 = Integer.parseInt(input);
+                    if (num1 <= 0 || num1 >= 0){
+                        num1Valid = true;
+                    }
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                        num1Valid = false;
+                }
+            }
+            boolean num2Valid = false;
+            while (!num2Valid) {
+                    input = JOptionPane.showInputDialog("Enter second number: ");
+                    try {
+                        num2 = Integer.parseInt(input);
+                        if (num2 <= 0 || num2 >= 0){
+                        num2Valid = true;
+                        }
+                    } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                            num2Valid = false;
+                    }        
+                }
+                    equals = num1 - num2;
+                    JOptionPane.showMessageDialog(null, "Subtraction:\n\n" + num1 + " - " + num2 + " = " + equals);
+                    equation = 0;
+                    mainMenu();
+        }
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="basicMath_multiply">
+        if (equation == 3){
+            String input;
+            boolean num1Valid = false;
+            while (!num1Valid) {
+                input = JOptionPane.showInputDialog("Enter first number: ");
+                try {
+                    num1 = Integer.parseInt(input);
+                    if (num1 <= 0 || num1 >= 0){
+                        num1Valid = true;
+                    }
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                        num1Valid = false;
+                }
+            }
+            boolean num2Valid = false;
+            while (!num2Valid) {
+                    input = JOptionPane.showInputDialog("Enter second number: ");
+                    try {
+                        num2 = Integer.parseInt(input);
+                        if (num2 <= 0 || num2 >= 0){
+                        num2Valid = true;
+                        }
+                    } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                            num2Valid = false;
+                    }        
+                }
+                    equals = num1 * num2;
+                    JOptionPane.showMessageDialog(null, "Multiplication:\n\n" + num1 + " * " + num2 + " = " + equals);
+                    equation = 0;
+                    mainMenu(); 
+        }
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="basicMath_divide">
+        if (equation == 4){
+            String input;
+            boolean num1Valid = false;
+            while (!num1Valid) {
+                input = JOptionPane.showInputDialog("Enter first number: ");
+                try {
+                    num1 = Integer.parseInt(input);
+                    if (num1 <= 0 || num1 >= 0){
+                        num1Valid = true;
+                    }
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                        num1Valid = false;
+                }
+            }
+            boolean num2Valid = false;
+            while (!num2Valid) {
+                    input = JOptionPane.showInputDialog("Enter second number: ");
+                    try {
+                        num2 = Integer.parseInt(input);
+                        if (num2 <= 0 || num2 >= 0){
+                            num2Valid = true;
+                        }
+                        if (num2 == 0){
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);               
+                            num2Valid = false;
+                        }
+                    } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                            num2Valid = false;
+                    }        
+                }
+                    equals = num1 / num2;
+                    JOptionPane.showMessageDialog(null, "Division:\n\n" + num1 + " / " + num2 + " = " + equals);
+                    equation = 0;
+                    mainMenu();
+        }
+        //</editor-fold>
+    }
+    public static void answerChecker1(){
+        String option; int inputValid; String input;
+            do {
+            option = JOptionPane.showInputDialog("Enter Math Symbol: (+ - * /)");
+                switch (option){
+                    case "+":
+                        equation = 1;
+                        inputValid = 1;
+                        break;
+                    case "-":
+                        equation = 2;
+                        inputValid = 1;
+                        break;
+                    case "*":
+                        equation = 3;
+                        inputValid = 1;
+                        break;
+                    case "/":
+                        equation = 4;
+                        inputValid = 1;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Please Enter One of These Math Symbols\n+ (Addition)\n- (Subtraction)\n * (Multiplication)\n / (Division)");
+                        inputValid = 0;
+                        break;
+                }   
+            } while (inputValid == 0);
+
+                boolean num1Valid = false;
+                while (!num1Valid) {
+                        input = JOptionPane.showInputDialog("Enter first number: ");
+                        try {
+                            num1 = Integer.parseInt(input);
+                            num1Valid = true;
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                                num1Valid = false;
+                        }        
+                    }
+                boolean num2Valid = false;
+                while (!num2Valid) {
+                        input = JOptionPane.showInputDialog("Enter second number: ");
+                        try {
+                            num2 = Integer.parseInt(input);
+                            num2Valid = true;
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input);
+                                num2Valid = false;
+                        }   
+                        if (equation == 4){
+                            if (num2 == 0){
+                                JOptionPane.showMessageDialog(null, "Cant divide by 0!");
+                                num2Valid = false;
+                            }
+                        }
+                }
+            answerChecker2();   
+    }
+    public static void answerChecker2(){
+        boolean num3Valid = false; String input;
+            while (!num3Valid) {
+                    input = JOptionPane.showInputDialog("Enter your answer... ");
+                    try {
+                        answ = Integer.parseInt(input);
+                        num3Valid = true;
+                    } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Your input was invalid\nYour input: " + input + "\nPlease enter digits only.");
+                            num3Valid = false;
+                    }
+            }
+        answerChecker3();
+    }
+    public static void answerChecker3(){
+                if (equation == 1){
+                    answerKey = num1 + num2;
+                    if (answ == answerKey)
+                        JOptionPane.showMessageDialog(null, "CORRECT!");
+                    else{
+                        if (attempts < 2){ //guessing wrong 3 times will give you the answer
+                        JOptionPane.showMessageDialog(null, "try again.");
+                        attempts = attempts + 1;
+                        answerChecker2();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "INCORRECT\nAnswer: " + num1 + " + " + num2 + " = " + answerKey);
+                        }
+                    }
+                }
+                if (equation == 2){
+                    answerKey = num1 - num2;
+                    if (answ == answerKey)
+                        JOptionPane.showMessageDialog(null, "CORRECT!");
+                    else{
+                        if (attempts < 2){
+                        JOptionPane.showMessageDialog(null, "try again.");
+                        attempts = attempts + 1;
+                        answerChecker2();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "INCORRECT\nAnswer: " + num1 + " - " + num2 + " = " + answerKey);
+                        }
+                    }
+                }
+                if (equation == 3){
+                    answerKey = num1 * num2;
+                    if (answ == answerKey)
+                        JOptionPane.showMessageDialog(null, "CORRECT!");
+                    else{
+                        if (attempts < 2){
+                        JOptionPane.showMessageDialog(null, "try again.");
+                        attempts = attempts + 1;
+                        answerChecker2();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "INCORRECT\nAnswer: " + num1 + " * " + num2 + " = " + answerKey);
+                        }
+                    }
+                }
+                if (equation == 4){
+                    answerKey = num1 / num2;
+                    if (answ == answerKey)
+                        JOptionPane.showMessageDialog(null, "CORRECT!");
+                    else{
+                        if (attempts < 2){
+                        JOptionPane.showMessageDialog(null, "try again.");
+                        attempts = attempts + 1;
+                        answerChecker2();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "INCORRECT\nAnswer: " + num1 + " / " + num2 + " = " + answerKey);
+                        }
+                    }
+                }
+        exit();
+    }
+    public static void selfQuiz(){
+        JOptionPane.showMessageDialog(null, "I'm sorry, this feature is not yet available");
+        mainMenu();
+    }
+    public static void numberGuesser(){
+        attempts = 0;
+        String option;
+        String input; 
+        int inputValid, difficulty = 0, guess = 0;
+        do {
+            option = JOptionPane.showInputDialog("Please choose a difficulty...\n\n"
+                + "1. Easy -------- (1-20)\n2. Medium ----- (1-50)\n3. Hard --------- (1-100)\n4. INSANE "
+                    + "------- (1-1,000)\n5. Main Menu\n\nType 1-5 to choose an option");
+            //<editor-fold defaultstate="collapsed" desc="Switch">
+            switch (option){
+                case "1":
+                    difficulty = 1;
+                    inputValid = 1;
+                    break;
+                case "2":
+                    difficulty = 2;
+                    inputValid = 1;
+                    break;
+                case "3":
+                    difficulty = 3;
+                    inputValid = 1;
+                    break;
+                case "4":
+                    difficulty = 4;
+                    inputValid = 1;
+                    break;
+                case "5":
+                    inputValid=1;
+                    mainMenu();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease type a number 1-5");
+                    inputValid = 0;
+                    break;
+            }
+        //</editor-fold>
+        } while (inputValid == 0);
+        //<editor-fold defaultstate="collapsed" desc="easy">
+        if (difficulty == 1){
+            double doubleRandomNumber = Math.random() * 20;//creates random number
+            int randomNumber = (int)doubleRandomNumber;//changes double to an integer
+            //OUTPUT ANSWER - System.out.println("randomNumber = " + randomNumber);
+            boolean correct = false;
+            while (!correct) {
+                input = JOptionPane.showInputDialog("Enter a number between 0 & 20\n(Type -1 to Exit)");
+                //<editor-fold defaultstate="collapsed" desc="parseInt">
+                try{
+                    guess = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease enter numbers only!");
+                    correct = false;
+                }
+                //</editor-fold>
+                if (guess == randomNumber){
+                    JOptionPane.showMessageDialog(null, "CORRECT!!!\nAttempts: " + attempts);
+                    correct = true;
+                }
+                if (guess != randomNumber && guess != -1) {
+                    JOptionPane.showMessageDialog(null, "Try again");
+                    attempts = attempts + 1;
+                    correct = false;
+                }
+                if (guess == -1){
+                    JOptionPane.showMessageDialog(null, "The number is: " + randomNumber);
+                    correct = true;
+                }
+            }
+        }
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="med">
+        if (difficulty == 2){
+            double doubleRandomNumber = Math.random() * 50;//creates random number
+            int randomNumber = (int)doubleRandomNumber;//changes double to an integer
+            //OUTPUT ANSWER - System.out.println("randomNumber = " + randomNumber);
+            boolean correct = false;
+            while (!correct) {
+                input = JOptionPane.showInputDialog("Enter a number between 0 & 50\n(Type -1 to Exit)");
+                //<editor-fold defaultstate="collapsed" desc="parseInt">
+                try{
+                    guess = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease enter numbers only!");
+                    correct = false;
+                }
+                //</editor-fold>
+                if (guess == randomNumber){
+                    JOptionPane.showMessageDialog(null, "CORRECT!!!\nAttempts: " + attempts);
+                    correct = true;
+                }
+                if (guess != randomNumber && guess != -1) {
+                    JOptionPane.showMessageDialog(null, "Try again");
+                    attempts = attempts + 1;
+                    correct = false;
+                }
+                if (guess == -1){
+                    JOptionPane.showMessageDialog(null, "The number is: " + randomNumber);
+                    correct = true;
+                }
+            }
+        }
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="hard">
+        if (difficulty == 3){
+            double doubleRandomNumber = Math.random() * 100;//creates random number
+            int randomNumber = (int)doubleRandomNumber;//changes double to an integer
+            //OUTPUT ANSWER - System.out.println("randomNumber = " + randomNumber);
+            boolean correct = false;
+            while (!correct) {
+                input = JOptionPane.showInputDialog("Enter a number between 0 & 100\n(Type -1 to Exit)");
+                //<editor-fold defaultstate="collapsed" desc="parseInt">
+                try{
+                    guess = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease enter numbers only!");
+                    correct = false;
+                }
+                //</editor-fold>
+                if (guess == randomNumber){
+                    JOptionPane.showMessageDialog(null, "CORRECT!!!\nAttempts: " + attempts);
+                    correct = true;
+                }
+                if (guess != randomNumber && guess != -1) {
+                    JOptionPane.showMessageDialog(null, "Try again");
+                    attempts = attempts + 1;
+                    correct = false;
+                }
+                if (guess == -1){
+                    JOptionPane.showMessageDialog(null, "The number is: " + randomNumber);
+                    correct = true;
+                }
+            }
+        }
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="insane">
+        if (difficulty == 4){
+            double doubleRandomNumber = Math.random() * 1000;//creates random number
+            int randomNumber = (int)doubleRandomNumber;//changes double to an integer
+            //OUTPUT ANSWER - System.out.println("randomNumber = " + randomNumber);
+            boolean correct = false;
+            while (!correct) {
+                input = JOptionPane.showInputDialog("Enter a number between 0 & 1000\n(Type -1 to Exit)");
+                //<editor-fold defaultstate="collapsed" desc="parseInt">
+                try{
+                    guess = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Your input was invalid\nPlease enter numbers only!");
+                    correct = false;
+                }
+                //</editor-fold>
+                if (guess == randomNumber){
+                    JOptionPane.showMessageDialog(null, "CORRECT!!!\nAttempts: " + attempts);
+                    correct = true;
+                }
+                if (guess != randomNumber && guess != -1) {
+                    JOptionPane.showMessageDialog(null, "Try again");
+                    attempts = attempts + 1;
+                    correct = false;
+                }
+                if (guess == -1){
+                    JOptionPane.showMessageDialog(null, "The number is: " + randomNumber);
+                    correct = true;
+                }
+            }
+        }
+//</editor-fold>
+        mainMenu();
+        }
+    public static void exit(){
+        Object[] options1 = { "Yes", "No" };
+                JPanel panel = new JPanel();
+                panel.add(new JLabel("Shutdown the program?"));
+        
+                int result = JOptionPane.showOptionDialog(null, panel, "Shutdown", JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.PLAIN_MESSAGE, null, options1, null);
+                
+                if (result == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(null, "Thank you, Have a great day!");
+                    System.out.println("\nShutting Down...");
+                    System. exit(0);
+                }
+                if (result == JOptionPane.NO_OPTION)
+                    mainMenu();
+    }
+}
